@@ -58,6 +58,23 @@ function cartelera_details_callback($post) {
     echo '<button type="button" id="fetch_thumbnail">Obtener Miniatura</button>';
     echo '<br/><br/>';
 
+    echo '<label for="cartelera_poster"> Miniatura del Tráiler </label>';
+
+    if ($trailer_thumbnail) {
+        echo '<div id="thumbnail_container" style="display:block;">';
+        echo '<img id="thumbnail_preview" src="' . esc_url($trailer_thumbnail) . '" alt="Miniatura del Tráiler" style="max-width: 200px; height: auto;" />';
+        echo '</div>';
+    } else {
+        echo '<div id="thumbnail_container" style="display:none;">';
+        echo '<img id="thumbnail_preview" src="" alt="Miniatura del Tráiler" style="max-width: 200px; height: auto;" />';
+        echo '</div>';
+    }
+
+    echo '<input type="hidden" id="cartelera_trailer_id" name="cartelera_trailer_id" value="' . esc_attr($trailer_id) . '" />';
+    echo '<input type="hidden" id="cartelera_trailer_thumbnail" name="cartelera_trailer_thumbnail" value="' . esc_attr($trailer_thumbnail) . '" />';
+    echo '<br/><br/>';
+
+
     echo '<label for="cartelera_cartelera">¿En Cartelera?</label>';
     echo '<input type="checkbox" id="cartelera_cartelera" name="cartelera_cartelera" value="1" ' . checked($cartelera, '1', false) . ' />';
     echo '<br/><br/>';

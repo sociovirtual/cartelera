@@ -24,14 +24,27 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/meta-boxes.php';
 
 // Cargar los estilos y scripts en panel de administración de WordPress
 function agregar_admin_scripts_css() {
+    //carga styles admin
     wp_enqueue_style( 'cartelera-admin-style', plugins_url( 'css/admin-style.css', __FILE__ ) );
+    // carga scripts admin
     wp_enqueue_script('cartelera-admin-scripts', plugin_dir_url(__FILE__) . 'js/admin-scripts.js', array('jquery'), null, true);
+    
+    // Cargar los estilos de jQuery UI datepicker
+    wp_enqueue_style('jquery-ui-datepicker-css', 'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css');
+
+    // Cargar jQuery UI datepicker
+    wp_enqueue_script('jquery-ui-datepicker');
+    
+    // Localización para el datepicker en español
+    wp_set_script_translations('jquery-ui-datepicker', 'jquery-ui-datepicker', 'wp-i18n');
 }
 add_action('admin_enqueue_scripts', 'agregar_admin_scripts_css');
 
 // Cargar scripts y estilos para usuario
 function cartelera_enqueue_scripts() {
+    // carga stylos
     wp_enqueue_style('cartelera-styles', plugin_dir_url(__FILE__) . 'css/styles.css');
+    // carga scripts    
     wp_enqueue_script('cartelera-scripts', plugin_dir_url(__FILE__) . 'js/scripts.js', array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'cartelera_enqueue_scripts');
