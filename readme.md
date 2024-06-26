@@ -6,7 +6,7 @@
 - Tested up to: 5.8
 - Stable tag: 1.0.0
 - License: GPLv2 or later
-- License URI: [Licencia Pública General de GNU (GPLv2 o posterior)] (https://www.gnu.org/licenses/gpl-2.0.html)
+- License URI: [Licencia Pública General de GNU (GPLv2 o posterior)](https://www.gnu.org/licenses/gpl-2.0.html)
 
 % title
 % author(s) (separated by semicolons)
