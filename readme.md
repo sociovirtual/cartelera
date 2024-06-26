@@ -1,16 +1,13 @@
 # Plug-ins Cartelera
 
-- Contributors: Jose Vargas Molina - Sociovirtual.com
+- Author: SocioVirtualSPA <soporte@sociovirtual.com>
+- Date:   Wed Jun 26 13:57:09 2024 -0400
 - Tags: cine, películas, cartelera, WordPress
 - Requires at least: 5.0
 - Tested up to: 5.8
 - Stable tag: 1.0.0
 - License: GPLv2 or later
 - License URI: [Licencia Pública General de GNU (GPLv2 o posterior)](https://www.gnu.org/licenses/gpl-2.0.html)
-
-% title
-% author(s) (separated by semicolons)
-% date
 
 ## Requisitos
 
