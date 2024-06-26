@@ -3,9 +3,9 @@
 // Agregar meta boxes
 function cartelera_add_meta_box() {
     add_meta_box(
-        'cartelera_detalles',
-        'Detalles de Cartelera',
-        'mostrar_meta_box_cartelera',
+        'cartelera_details',
+        __('Detalles Cartelera', 'cartelera-lang'),
+        'cartelera_details_callback',
         'cartelera',
         'normal',
         'high'
@@ -15,7 +15,7 @@ add_action('add_meta_boxes', 'cartelera_add_meta_box');
 
 // Mostrar contenido del meta box 
 function cartelera_details_callback($post) {
-    wp_nonce_field('cartelera_save_details', 'caretelera_details_nonce');
+    wp_nonce_field('cartelera_details_callback_save', 'cartelera_details_nonce');
 
     // Obtener valores actuales si ya están guardados
     $clasificacion = get_post_meta($post->ID, '_cartelera_clasificacion', true);
@@ -37,43 +37,49 @@ function cartelera_details_callback($post) {
 
 
     // Formulario del meta box
-    echo '<label for="cartelera_fecha_desde">Fecha Desde:</label>';
+    echo '<label for="cartelera_fecha_desde">Fecha Desde : </label>';
     echo '<input type="text" id="cartelera_fecha_desde" name="cartelera_fecha_desde" value="' . esc_attr($fecha_desde_formato) . '" />';
     echo '<br/><br/>';
 
-    echo '<label for="cartelera_fecha_hasta">Fecha Hasta:</label>';
+    echo '<label for="cartelera_fecha_hasta">Fecha Hasta : </label>';
     echo '<input type="text" id="cartelera_fecha_hasta" name="cartelera_fecha_hasta" value="' . esc_attr($fecha_hasta_formato) . '" />';
     echo '<br/><br/>';
 
-    echo '<label for="cartelera_duracion">Duración (min):</label>';
+    echo '<label for="cartelera_clasificacion"> Clasificacion : </label>';
+    echo '<input type="text" id="cartelera_clasificacion" name="cartelera_clasificacion" value="' . esc_attr($clasificacion) . '" />';
+    echo '<br/><br/>';
+
+    echo '<label for="cartelera_duracion"> Duración (min) : </label>';
     echo '<input type="number" id="cartelera_duracion" name="cartelera_duracion" value="' . esc_attr($duracion) . '" size="25" />';
     echo '<br/><br/>';
 
-    echo '<label for="cartelera_duracion">Duración (min):</label>';
-    echo '<input type="number" id="cartelera_duracion" name="cartelera_duracion" value="' . esc_attr($duracion) . '" size="25" />';
+    // imagen poster
+    echo '<label for="cartelera_poster"> Imagen Póster : </label>';
+    echo '<div id="cartelera_poster_id"> ';
+    echo '<img src="' . esc_url(wp_get_attachment_image_url($poster, 'medium')) . '" style="max-width: 200px; height: auto;" /><br/>'; 
+    echo '<a href="#" id="remove_cartelera_poster">Eliminar</a></br>';
+    echo '</div>';
+    echo '<input type="hidden" id="cartelera_poster" name="cartelera_poster" value="' . esc_attr($poster) . '" > ';
+    echo '<button class="button" id="upload_cartelera_poster">Subir/Seleccionar Póster</button>';
     echo '<br/><br/>';
 
+    // obtener datos youtube 
     echo '<label for="cartelera_trailer">URL del Tráiler:</label>';
     echo '<input type="text" id="cartelera_trailer" name="cartelera_trailer" value="' . esc_attr($trailer) . '" size="25" />';
     echo '<button type="button" id="fetch_thumbnail">Obtener Miniatura</button>';
     echo '<br/><br/>';
 
-    echo '<label for="cartelera_poster"> Miniatura del Tráiler </label>';
+    echo '<label for="cartelera_poster">Miniatura del Tráiler</label>';
 
-    if ($trailer_thumbnail) {
-        echo '<div id="thumbnail_container" style="display:block;">';
-        echo '<img id="thumbnail_preview" src="' . esc_url($trailer_thumbnail) . '" alt="Miniatura del Tráiler" style="max-width: 200px; height: auto;" />';
-        echo '</div>';
-    } else {
-        echo '<div id="thumbnail_container" style="display:none;">';
-        echo '<img id="thumbnail_preview" src="" alt="Miniatura del Tráiler" style="max-width: 200px; height: auto;" />';
-        echo '</div>';
-    }
+    echo '<div id="thumbnail_container" style="' . ($trailer_thumbnail ? 'display:block;' : 'display:none;') . '">';
+    echo '<img id="thumbnail_preview" src="' . esc_url($trailer_thumbnail) . '" alt="Miniatura del Tráiler" style="max-width: 200px; height: auto;" />';
+    echo '</div>';
 
     echo '<input type="hidden" id="cartelera_trailer_id" name="cartelera_trailer_id" value="' . esc_attr($trailer_id) . '" />';
     echo '<input type="hidden" id="cartelera_trailer_thumbnail" name="cartelera_trailer_thumbnail" value="' . esc_attr($trailer_thumbnail) . '" />';
     echo '<br/><br/>';
 
+//
 
     echo '<label for="cartelera_cartelera">¿En Cartelera?</label>';
     echo '<input type="checkbox" id="cartelera_cartelera" name="cartelera_cartelera" value="1" ' . checked($cartelera, '1', false) . ' />';
@@ -108,9 +114,9 @@ function cartelera_details_callback($post) {
 
 
 // Guardar Meta Box
-function cartelera_save_details($post_id) {
+function cartelera_details_callback_save($post_id) {
 
-    if (!isset($_POST['cartelera_details_nonce']) || !wp_verify_nonce($_POST['cartelera_details_nonce'], 'cartelera_save_details')) {
+    if (!isset($_POST['cartelera_details_nonce']) || !wp_verify_nonce($_POST['cartelera_details_nonce'], 'cartelera_details_callback_save')) {
         return;
     }
 
@@ -172,4 +178,4 @@ function cartelera_save_details($post_id) {
     }
 
 }
-add_action('save_post', 'cartelera_save_details');
+add_action('save_post', 'cartelera_details_callback_save');

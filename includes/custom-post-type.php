@@ -17,18 +17,18 @@ function registrar_cartelera_post_type() {
     );
 
     $args = array(
-        'labels'              => $labels,
-        'public'              => true,
-        'has_archive'         => true,
-        'publicly_queryable'  => true,
-        'query_var'           => true,
-        'rewrite'             => array( 'slug' => 'cartelera' ),
-        'capability_type'     => 'post',
-        'supports'            => array( 'title', 'editor', 'thumbnail' ),
-        'show_in_rest'       => true,
-        'show_in_graphql' => true, // Asegurarse de agregar esta línea
-        'graphql_single_name' => 'Anuncio', // Nombre singular para GraphQL
-        'graphql_plural_name' => 'Anuncios' // Nombre plural para GraphQL
+        'labels'                => $labels,
+        'public'                => true,
+        'has_archive'           => true,
+        'publicly_queryable'    => true,
+        'query_var'             => true,
+        'rewrite'               => array( 'slug' => 'cartelera' ),
+        'capability_type'       => 'post',
+        'supports'              => array( 'title', 'editor', 'thumbnail' ),
+        'show_in_rest'          => true,
+        'show_in_graphql'       => true, // Asegurarse de agregar esta línea
+        'graphql_single_name'   => 'cartelera', // Nombre singular para GraphQL
+        'graphql_plural_name'   => 'carteleras' // Nombre plural para GraphQL
     );
 
     register_post_type( 'cartelera', $args );

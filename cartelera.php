@@ -17,18 +17,23 @@ defined( 'ABSPATH' ) or die( '¡Acceso directo no permitido!' );
 
 // Incluir los tipos de publicaciones personalizadas, metaboxes y shortcodes.
 require_once plugin_dir_path( __FILE__ ) . 'includes/custom-post-type.php';
-require_once plugin_dir_path( __FILE__ ) . 'includes/display.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/simple.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/meta-boxes.php';
 // require_once plugin_dir_path( __FILE__ ) . 'includes/shortcode.php';
-// require_once plugin_dir_path( __FILE__ ) . 'includes/wpgraphql.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/wpgraphql.php';
 
 // Cargar los estilos y scripts en panel de administración de WordPress
 function agregar_admin_scripts_css() {
     //carga styles admin
-    wp_enqueue_style( 'cartelera-admin-style', plugins_url( 'css/admin-style.css', __FILE__ ) );
+    wp_enqueue_style( 'cartelera-admin-style', plugins_url( 'css/admin-styles.css', __FILE__ ) );
     // carga scripts admin
-    wp_enqueue_script('cartelera-admin-scripts', plugin_dir_url(__FILE__) . 'js/admin-scripts.js', array('jquery'), null, true);
     
+    wp_enqueue_script('cartelera-admin-scripts', plugin_dir_url(__FILE__) . 'js/admin-scripts.js', array('jquery'), null, true);
+    wp_enqueue_script('cartelera-admin-poster', plugin_dir_url(__FILE__) . 'js/admin-poster.js', array('jquery'), null, true);
+    wp_enqueue_script('cartelera-admin-youtube', plugin_dir_url(__FILE__) . 'js/admin-youtube.js', array('jquery'), null, true);
+    wp_enqueue_script('cartelera-admin-horarios', plugin_dir_url(__FILE__) . 'js/admin-horarios.js', array('jquery'), null, true);
+    wp_enqueue_script('cartelera-admin-datepicker', plugin_dir_url(__FILE__) . 'js/admin-datepicker.js', array('jquery'), null, true);
+
     // Cargar los estilos de jQuery UI datepicker
     wp_enqueue_style('jquery-ui-datepicker-css', 'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css');
 
@@ -37,6 +42,16 @@ function agregar_admin_scripts_css() {
     
     // Localización para el datepicker en español
     wp_set_script_translations('jquery-ui-datepicker', 'jquery-ui-datepicker', 'wp-i18n');
+
+    // admin-datepicker.js
+    wp_enqueue_script('cartelera-admin-scripts', plugin_dir_url(__FILE__) . 'js/admin-datepicker.js', array('jquery'), null, true);
+
+    // admin-datepicker.js
+    wp_enqueue_script('cartelera-admin-scripts', plugin_dir_url(__FILE__) . 'js/admin-horarios.js', array('jquery'), null, true);
+
+    // admin-datepicker.js
+    wp_enqueue_script('cartelera-admin-scripts', plugin_dir_url(__FILE__) . 'js/admin-youtube.js', array('jquery'), null, true);
+
 }
 add_action('admin_enqueue_scripts', 'agregar_admin_scripts_css');
 
