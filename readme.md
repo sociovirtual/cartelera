@@ -8,6 +8,10 @@
 - License: GPLv2 or later
 - License URI: [Licencia Pública General de GNU (GPLv2 o posterior)] (https://www.gnu.org/licenses/gpl-2.0.html)
 
+% title
+% author(s) (separated by semicolons)
+% date
+
 ## Requisitos
 
 - **WordPress 6.5 o superior**
